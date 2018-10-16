@@ -5,8 +5,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.swing.event.ListDataEvent;
 import javax.transaction.Transactional;
@@ -18,6 +20,8 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@SpringBootApplication
+@WebAppConfiguration
 public class CategoryServiceImplTest {
 
     @Autowired
@@ -25,8 +29,8 @@ public class CategoryServiceImplTest {
 
     @Test
     public void findOne() {
-        ProductCategory productCategory = categoryService.findOne(6);
-        Assert.assertEquals(new Integer(6), productCategory.getId());
+        ProductCategory productCategory = categoryService.findOne(1);
+        Assert.assertEquals(new Integer(1), productCategory.getId());
     }
 
     @Test
@@ -48,7 +52,7 @@ public class CategoryServiceImplTest {
     public void save() {
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryName("大家最爱");
-        productCategory.setCategoryType(1);
+        productCategory.setCategoryType(3);
         ProductCategory result = categoryService.save(productCategory);
         Assert.assertNotNull(result);
     }
