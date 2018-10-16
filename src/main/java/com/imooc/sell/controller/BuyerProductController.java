@@ -38,7 +38,7 @@ public class BuyerProductController {
     @ApiOperation(value = "查询所有商品", notes = "查询所有商品")
 //    @ApiImplicitParam(name = "id", value = "学生ID", paramType = "path", required = true, dataType = "Integer")
     @GetMapping("/list")
-    public ResultVO<ProductVO> list() {
+    public ResultVO<List<ProductVO>> list() {
         //1. 查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
 
