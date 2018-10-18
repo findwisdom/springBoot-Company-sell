@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-public class ProductInfo extends BaseEntity{
+public class ProductInfo extends BaseTimeEntity{
     /** 产品名称 */
     private String productName;
 

@@ -11,7 +11,8 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
-public class BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class BaseTimeEntity {
 
     private static Gson gson = new Gson();
 
@@ -19,6 +20,11 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @CreatedDate
+    private Date createDate;
+
+    @LastModifiedDate
+    private Date updateDate;
 
     @Override
     public String toString() {

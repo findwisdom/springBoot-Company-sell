@@ -17,7 +17,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class ProductCategory extends BaseEntity {
+public class ProductCategory extends BaseTimeEntity {
 
     /** 类目名称 */
     private String categoryName;
