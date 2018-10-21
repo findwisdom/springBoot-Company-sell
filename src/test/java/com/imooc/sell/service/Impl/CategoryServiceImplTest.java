@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@SpringBootApplication
 @WebAppConfiguration
 public class CategoryServiceImplTest {
 
@@ -48,7 +47,6 @@ public class CategoryServiceImplTest {
     }
 
     @Test
-    @Transactional
     public void save() {
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryName("大家最爱");

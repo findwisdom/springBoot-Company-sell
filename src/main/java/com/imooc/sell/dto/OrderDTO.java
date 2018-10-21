@@ -3,6 +3,7 @@ package com.imooc.sell.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import com.imooc.sell.dataobject.BaseOnlyTimeEnity;
 import com.imooc.sell.dataobject.BaseTimeEntity;
 import com.imooc.sell.dataobject.OrderDetail;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @Data
 //@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 //@JsonInclude(JsonInclude.Include.NON_NULL)
-public class OrderDTO extends BaseTimeEntity {
+public class OrderDTO extends BaseOnlyTimeEnity {
 
     /** 订单id. */
     private String orderId;

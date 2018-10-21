@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@SpringBootApplication
 @WebAppConfiguration
 public class ProductCategoryRepositoryTest {
 

@@ -1,18 +1,25 @@
 package com.imooc.sell.dataobject;
 
+import com.imooc.sell.dataobject.BaseOnlyTimeEnity;
 import com.imooc.sell.enums.OrderStatusEnum;
 import com.imooc.sell.enums.PayStatusEnum;
+import jdk.internal.org.objectweb.asm.TypeReference;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Data
-public class OrderMaster extends BaseTimeEntity{
+public class OrderMaster extends BaseTimeEntity {
 
+
+    /**  订单id. */
+    private String orderId;
 
     /** 买家名字. */
     private String buyerName;

@@ -1,8 +1,11 @@
 package com.imooc.sell.service.Impl;
 
 import com.imooc.sell.dataobject.ProductInfo;
+import com.imooc.sell.dto.CartDTO;
+import com.imooc.sell.dto.OrderDTO;
 import com.imooc.sell.enums.ProductStatusEnum;
 import com.imooc.sell.repository.ProductInfoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,14 +18,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@SpringBootApplication
 @WebAppConfiguration
+@Slf4j
 public class ProductServiceImplTest {
 
     @Autowired
@@ -61,5 +65,27 @@ public class ProductServiceImplTest {
         ProductInfo result = productService.save(productInfo);
 
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void decreaseStockTest () {
+        ProductInfo productInfo = productService.findOne(1);
+        if (productInfo == null) {
+            throw new RuntimeException("无Id 为一的产品 请添加产品");
+        }
+        Integer count = productInfo.getProductStock() - 2;
+
+        List<CartDTO> cartDTOList = new ArrayList<>();
+        CartDTO cart1 = new CartDTO(1, 2);
+        cartDTOList.add(cart1);
+
+        productService.decreaseStock(cartDTOList);
+        ProductInfo productInfoChange = productService.findOne(1);
+        if (productInfoChange == null) {
+            throw new RuntimeException("无Id 为一的产品 请添加产品");
+        }
+        System.out.println(count);
+        System.out.println(productInfo.getProductStock());
+        // Assert.assertNotEquals(count, productInfoChange.getProductStock());
     }
 }

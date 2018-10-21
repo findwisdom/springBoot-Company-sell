@@ -2,10 +2,13 @@ package com.imooc.sell.dataobject;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by 廖师兄
@@ -16,7 +19,7 @@ import java.math.BigDecimal;
 public class OrderDetail extends BaseTimeEntity{
 
     /** 订单id. */
-    private Integer orderId;
+    private String orderId;
 
     /** 商品id. */
     private Integer productId;
@@ -32,4 +35,5 @@ public class OrderDetail extends BaseTimeEntity{
 
     /** 商品小图. */
     private String productIcon;
+
 }
