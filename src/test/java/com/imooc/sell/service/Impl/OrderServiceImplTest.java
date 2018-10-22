@@ -24,6 +24,8 @@ public class OrderServiceImplTest {
 
     private final String BUYER_OPENID = "1XAEWSD";
 
+    private final String ORDERID = "1540122306055160608";
+
     @Autowired
     private OrderServiceImpl orderService;
 
@@ -58,6 +60,9 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
+        OrderDTO orderDTO = orderService.findOne(ORDERID);
+        System.out.println(orderDTO);
+        Assert.assertNotNull(orderDTO);
     }
 
     @Test
