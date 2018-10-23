@@ -25,7 +25,10 @@ import java.util.List;
 //@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO extends BaseOnlyTimeEnity {
 
-    /** 订单id. */
+    /** orderMaster.主键id */
+    private Integer id;
+
+    /** 订单orderId. */
     private String orderId;
 
     /** 买家名字. */
