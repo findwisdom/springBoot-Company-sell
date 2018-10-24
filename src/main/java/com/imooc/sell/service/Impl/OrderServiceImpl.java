@@ -81,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
         orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
         OrderMaster resultSave = orderMasterRepository.save(orderMaster);
         if (resultSave == null) {
-            throw new SellException(ResultEnum.S)
+            throw new SellException(ResultEnum.ORDER_WRITE_FAIL);
         }
         orderDTO.setId(resultSave.getId());
 
@@ -129,7 +129,7 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = new OrderMaster();
 
         //判断订单状态
-        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW)) {
+        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
             log.error("【取消订单】订单状态不正确, orderId={}, orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
@@ -166,7 +166,27 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO paid(OrderDTO orderDTO) {
-        return null;
+        OrderMaster orderMaster = new OrderMaster();
+
+        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+            log.error("【订单支付完成】订单状态不正确, orderId={}, orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+        if (!orderDTO.getPayStatus().equals(PayStatusEnum.WAIT.getCode())) {
+            log.error("【订单支付完成】订单支付状态不正确, orderDTO={}", orderDTO);
+            throw new SellException(ResultEnum.ORDER_PAY_STATUS_ERROR);
+        }
+
+        orderDTO.setPayStatus(PayStatusEnum.SUCCESS.getCode());
+        BeanUtils.copyProperties(orderDTO, orderMaster);
+        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
+
+        if (updateResult == null) {
+            log.error("【订单支付完成】更新失败, orderDTO={}", updateResult);
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
+
+        return orderDTO;
     }
 
     @Override
@@ -191,6 +211,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderDTO> findList(Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+
+        return new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasterPage.getTotalElements());
     }
 }

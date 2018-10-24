@@ -45,7 +45,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void findAll() {
-        PageRequest request = new PageRequest(0, 2);
+        PageRequest request =  PageRequest.of(0, 2);
         Page<ProductInfo> result = productService.findAll(request);
         Assert.assertNotEquals(0, result.getTotalElements());
     }
@@ -57,8 +57,8 @@ public class ProductServiceImplTest {
         productInfo.setProductName("双皮奶");
         productInfo.setProductPrice(new BigDecimal(5.20));
         productInfo.setProductStock(10);
-        productInfo.setCategoryType(3);
-        productInfo.setProductDescription("好喝的双皮蛋粥");
+        productInfo.setCategoryType(1);
+        productInfo.setProductDescription("好喝的双皮奶");
         productInfo.setProductIcon("http://xxxx.com");
         productInfo.setProductStatus(1);
 

@@ -19,8 +19,6 @@ public enum ResultEnum {
 
     ORDER_NOT_EXIST(12, "订单不存在"),
 
-//    ORDER_WRITE_FAIL(12, "订单不存在"),
-
     ORDERDETAIL_NOT_EXIST(13, "订单详情不存在"),
 
     ORDER_STATUS_ERROR(14, "订单状态不正确"),
@@ -48,6 +46,8 @@ public enum ResultEnum {
     LOGIN_FAIL(25, "登录失败, 登录信息不正确"),
 
     LOGOUT_SUCCESS(26, "登出成功"),
+
+    ORDER_WRITE_FAIL(27, "订单写入失败"),
     ;
 
     private Integer code;
